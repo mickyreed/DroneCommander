@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+List
+{% endblock %}
+
+{% block content %}
+<h1>User List</h1>
+<h1>Drone List</h1>
+<h1>Swarm List</h1>
+
+<form method="POST">
+
+    <!-- Security token -->
+    {% csrf_token %}
+
+    <!-- Using the formset -->
+    {{ form.as_p }}
+    {{ userName.name }}
+
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

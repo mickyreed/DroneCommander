@@ -1,0 +1,51 @@
+from django import forms
+from . models import User, Drone, Swarm
+
+# creating a form
+class UserForm(forms.ModelForm):
+
+    # create meta class
+    class Meta:
+        # specify model to be used
+        model = User
+
+        # specify fields to be used
+        fields = "__all__"
+        # fields = ["userName", "email"]
+        # exclude = ['title']
+
+class SwarmForm(forms.ModelForm):
+    #edit_swarm = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+
+    # create meta class
+    class Meta:
+        # specify model to be used
+        model = Swarm
+
+        # specify fields to be used
+        fields = "__all__"
+        # fields = ["swarmName"]
+        # exclude = ['title']
+
+
+# class DeleteSwarmForm(forms.Form):
+#     delete_swarm = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+
+
+class DroneForm(forms.ModelForm):
+
+    # create meta class
+    class Meta:
+        # specify model to be used
+        model = Drone
+
+        # specify fields to be used
+        fields = "__all__"
+        # fields = ["droneName"]
+        # exclude = ['title']
+
+
+
+
+# class DeleteSwarmForm(forms.Form):
+#     delete_swarm = forms.BooleanField(widget=forms.HiddenInput, initial=True)
