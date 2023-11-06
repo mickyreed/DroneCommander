@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+List
+{% endblock %}
+
+{% block content %}
+<h1>Index</h1>
+<ul>
+  {% for user in all_users %}
+    {% all_users %}
+     <li>
+                <p><strong>ID:</strong> <span>{ user.id }</span>,
+                <strong>Name:</strong> <span>{{ user.userName }}</span></p>
+            </li>
+  {% en
+<form method="POST">
+
+    <!-- Security token -->
+    {% csrf_token %}
+
+    <!-- Using the formset -->
+    {{ form.as_p }}
+    {{ userName.name }}
+
+
+    <input type="submit" value="Submit">
+</form>
+<a href="/update_user">   Update User | </a>
+<a href="/delete_user">   Delete User   </a>
+
+{% endblock %}

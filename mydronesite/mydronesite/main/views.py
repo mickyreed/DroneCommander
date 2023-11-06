@@ -73,3 +73,6 @@ def home(request):
 def login(response):
     return render(response, "main/add_user.html", {})
 
+def index(request):
+    all_users = User.objects.all()
+    return render(request, 'main/index.html', {'all_users': all_users})
