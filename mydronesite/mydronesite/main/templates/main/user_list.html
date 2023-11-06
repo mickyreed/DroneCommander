@@ -5,7 +5,15 @@ List
 {% endblock %}
 
 {% block content %}
-<h1>User List</h1>
+<h1>User List1</h1>
+<ul>
+  {% for user in all_users %}
+     <li>
+                <p><strong>ID:</strong> <span>{ user.id }</span>,
+                <strong>Name:</strong> <span>{{ user.userName }}</span></p>
+            </li>
+  {% endfor %}
+</ul>
 <h1>Drone List</h1>
 <h1>Swarm List</h1>
 

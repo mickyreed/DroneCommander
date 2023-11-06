@@ -1,15 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import User, Drone, Swarm
-from .forms import UserForm
-from .forms import DroneForm
-from .forms import SwarmForm
+from django.contrib.auth.models import User
+from .forms import UserForm, DroneForm, SwarmForm
 
 # Create your views here.
 
 def user_list(request):
-    #user = User
-    #all_users = User.objects(all)
-    return render(request, 'main/user_list.html', {})
+    all_users = User.objects.all()
+    return render(request, 'main/user_list.html', {'all_users': all_users})
 
 def add_user(request):
 
@@ -18,7 +16,7 @@ def add_user(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('main/add_user.html')
+            return redirect('home')
     else:
         form = UserForm()
     return render(request, 'main/add_user.html', {'form': form})
@@ -68,8 +66,9 @@ def add_swarm(request):
 
     return render(request, "main/add_swarm.html", context)
 
-def home(response):
-    return render(response, "main/home.html", {})
+def home(request):
+    all_users = User.objects.all()
+    return render(request, 'main/home.html', {'all_users': all_users})
 
 def login(response):
     return render(response, "main/login.html", {})
