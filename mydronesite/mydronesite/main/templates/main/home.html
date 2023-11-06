@@ -11,21 +11,40 @@
 {% block content %}
 
 <h1>Home Page</h1>
+<!--{% if user.is_authenticated %}-->
+<!--  Hi {{ user.username }}!-->
+<!--{% else %}-->
+<!--  <p>You are not logged in</p>-->
+<!--  <a href="{% url 'login' %}">Log In</a>-->
+<!--{% endif %}-->
 
 <h1>User List</h1>
 <ul>
-  {% for user in all_users %}
+  {% for users in all_users %}
      <li>
-        <p><strong>ID:</strong> <span>{{ user.id }}</span>,
-        <strong>Name:</strong> <span >{{ user.userName }}</span>,
-        <strong>Email:</strong> <span >{{ user.email }}</span></p>
+        <p><strong>ID:</strong> <span>{{ users.id }}</span>,
+        <strong>Name:</strong> <span >{{ users.userName }}</span>,
+        <strong>Email:</strong> <span >{{ users.email }}</span></p>
     </li>
   {% endfor %}
 </ul>
 <h1>Drone List</h1>
+<ul>
+  {% for drone in all_drones %}
+     <li>
+        <p><strong>ID:</strong> <span>{{ drone.id }}</span>,
+        <strong>Name:</strong> <span >{{ drone.droneName }}</span>,
+        </li>
+  {% endfor %}
+</ul>
 <h1>Swarm List</h1>
 <ul>
-
+  {% for swarm in all_swarms %}
+     <li>
+        <p><strong>ID:</strong> <span>{{ swarm.id }}</span>,
+        <strong>Name:</strong> <span >{{ swarm.swarmName }}</span>,
+        </li>
+  {% endfor %}
 </ul>
 
 {% endblock %}

@@ -19,7 +19,7 @@ def add_user(request):
             return redirect('home')
     else:
         form = UserForm()
-    return render(request, 'main/add_user.html', {'form': form})
+    return render(request, 'main/registration.html', {'form': form})
 
 
 def update_user(request, pk):
@@ -71,5 +71,5 @@ def home(request):
     return render(request, 'main/home.html', {'all_users': all_users})
 
 def login(response):
-    return render(response, "main/login.html", {})
+    return render(response, "main/add_user.html", {})
 

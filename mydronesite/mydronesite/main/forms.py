@@ -14,6 +14,7 @@ class UserForm(forms.ModelForm):
         # fields = ["userName", "email"]
         # exclude = ['title']
 
+
 class SwarmForm(forms.ModelForm):
     #edit_swarm = forms.BooleanField(widget=forms.HiddenInput, initial=True)
 
