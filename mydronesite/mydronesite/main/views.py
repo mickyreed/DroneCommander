@@ -80,7 +80,7 @@ def user_update(request, id):
     if form.is_valid():
         form.save()
         return redirect('home')
-    return render(request, 'main/update_user.html', {'user': user})
+    return render(request, 'main/user_update.html', {'user': user})
 
 def drone_update(request, id):
     drone = Drone.objects.get(id=id)
@@ -91,7 +91,7 @@ def drone_update(request, id):
     return render(request, 'main/update_drone.html', {'drone': drone})
 
 def swarm_update(request, id):
-    user = Swarm.objects.get(id=id)
+    swarm = Swarm.objects.get(id=id)
     form = SwarmForm(request.POST, instance=swarm)
     if form.is_valid():
         form.save()
@@ -141,8 +141,12 @@ def swarm_delete(request, id):
 #     return render(request, "main/swarm_add.html", context)
 
 def home(request):
-    all_users = User.objects.all()
-    return render(request, 'main/home.html', {'all_users': all_users})
+    users = User.objects.all()
+    return render(request, 'main/home.html', {'users': users})
+    drone = Drone.objects.all()
+    return render(request, 'main/home.html', {'drone': drone})
+    swarm = Swarm.objects.all()
+    return render(request, 'main/home.html', {'swarm': swarm})
 
 def login(response):
     return render(response, "main/user_add.html", {})

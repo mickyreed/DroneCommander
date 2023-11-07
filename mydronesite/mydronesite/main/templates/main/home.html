@@ -1,16 +1,21 @@
 {% extends 'main/base.html' %}
 <style type="text/css">
     .main{
-        margin-left:160px;padding: 0px 10px;}
+        margin-left:10px; margin-right:10px; padding: 0px 10px;}
 </style>
 <title>
     {% block title %} Home {% endblock %}
+
 </title>
 
 
 {% block content %}
+<h1 style="font-size: 64px; text-align: left;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%;">Drone Commander</h1>
 
-<h1>Home Page</h1>
 <!--{% if user.is_authenticated %}-->
 <!--  Hi {{ user.username }}!-->
 <!--{% else %}-->
@@ -18,33 +23,56 @@
 <!--  <a href="{% url 'login' %}">Log In</a>-->
 <!--{% endif %}-->
 
-<h1>User List</h1>
-<ul>
-  {% for users in all_users %}
-     <li>
-        <p><strong>ID:</strong> <span>{{ users.id }}</span>,
-        <strong>Name:</strong> <span >{{ users.userName }}</span>,
-        <strong>Email:</strong> <span >{{ users.email }}</span></p>
-    </li>
-  {% endfor %}
-</ul>
 <h1>Drone List</h1>
-<ul>
-  {% for drone in all_drones %}
-     <li>
-        <p><strong>ID:</strong> <span>{{ drone.id }}</span>,
-        <strong>Name:</strong> <span >{{ drone.droneName }}</span>,
-        </li>
-  {% endfor %}
-</ul>
+<body>
+
+    <table  style="width:60%; border: 1px solid; border-collapse: collapse">
+        <thead>
+            <tr style="border: 1px solid; text-align: center;">
+                <th>ID</th>
+                <th style="width:40%; border: 1px solid; ">Name</th>
+                <th style="width:40%; border: 1px solid;">IP Address</th>
+                <th style="width:20%; border: 1px solid;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for drone in drones %}
+            <tr style="border: 1px solid; text-align: center;">
+                <td style="width:20%; border: 1px solid; text-align: center; padding-left: 5%; padding-right: 5%;">{{ drone.id }}</td>
+                <td style="width:40%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ drone.droneName }}</td>
+                <td style="width:40%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ drone.IPAddress }}</td>
+                <td>
+                    <a  style="width:10%" href="/drone_edit/{{ drone.id }}"><span>Edit</span></a>
+                    <a  style="width:10%" href="/drone_delete/{{ drone.id }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
 <h1>Swarm List</h1>
-<ul>
-  {% for swarm in all_swarms %}
-     <li>
-        <p><strong>ID:</strong> <span>{{ swarm.id }}</span>,
-        <strong>Name:</strong> <span >{{ swarm.swarmName }}</span>,
-        </li>
-  {% endfor %}
-</ul>
+    <body>
+
+    <table  style="width:60%; border: 1px solid; border-collapse: collapse">
+        <thead>
+            <tr style="border: 1px solid; text-align: center;">
+                <th>ID</th>
+                <th style="width:40%; border: 1px solid; ">Name</th>
+                <th style="width:20%; border: 1px solid;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for swarm in swarm %}
+            <tr style="border: 1px solid; text-align: center;">
+                <td style="width:20%; border: 1px solid; text-align: center; padding-left: 5%; padding-right: 5%;">{{ swarm.id }}</td>
+                <td style="width:40%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ swarm.swarmName }}</td>
+                <td>
+                    <a  style="width:10%" href="/swarm_edit/{{ swarm.id }}"><span>Edit</span></a>
+                    <a  style="width:10%" href="/swarm_delete/{{ swarm.id }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}

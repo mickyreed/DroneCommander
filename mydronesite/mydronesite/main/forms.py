@@ -16,7 +16,6 @@ class UserForm(forms.ModelForm):
 
 
 class SwarmForm(forms.ModelForm):
-    #edit_swarm = forms.BooleanField(widget=forms.HiddenInput, initial=True)
 
     # create meta class
     class Meta:
@@ -27,11 +26,6 @@ class SwarmForm(forms.ModelForm):
         # fields = "__all__"
         fields = ["swarmName"]
         # exclude = ['title']
-
-
-# class DeleteSwarmForm(forms.Form):
-#     delete_swarm = forms.BooleanField(widget=forms.HiddenInput, initial=True)
-
 
 class DroneForm(forms.ModelForm):
 
@@ -44,9 +38,3 @@ class DroneForm(forms.ModelForm):
         # fields = "__all__"
         fields = ["droneName", "IPAddress"]
         # exclude = ['title']
-
-
-
-
-# class DeleteSwarmForm(forms.Form):
-#     delete_swarm = forms.BooleanField(widget=forms.HiddenInput, initial=True)
