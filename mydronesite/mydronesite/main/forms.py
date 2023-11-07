@@ -10,8 +10,8 @@ class UserForm(forms.ModelForm):
         model = User
 
         # specify fields to be used
-        fields = "__all__"
-        # fields = ["userName", "email"]
+        # fields = "__all__"
+        fields = ["userName", "email"]
         # exclude = ['title']
 
 
@@ -24,8 +24,8 @@ class SwarmForm(forms.ModelForm):
         model = Swarm
 
         # specify fields to be used
-        fields = "__all__"
-        # fields = ["swarmName"]
+        # fields = "__all__"
+        fields = ["swarmName"]
         # exclude = ['title']
 
 
@@ -41,8 +41,8 @@ class DroneForm(forms.ModelForm):
         model = Drone
 
         # specify fields to be used
-        fields = "__all__"
-        # fields = ["droneName"]
+        # fields = "__all__"
+        fields = ["droneName", "IPAddress"]
         # exclude = ['title']
 
 

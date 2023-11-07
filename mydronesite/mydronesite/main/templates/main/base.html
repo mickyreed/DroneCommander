@@ -1,5 +1,7 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
         <style type="text/css">
 		.sidenav {
 			height:100%;
@@ -40,12 +42,18 @@
 
     <body>
         <div class="sidenav">
+            <a href="/index">Index</a>
             <a href="/">Home</a>
             <a href="/login">Login</a>
-            <a href="/add_drone">Drones</a>
-            <a href="/add_swarm">Swarm</a>
-            <a href="/add_user">Users</a>
-            <a href="/index">Index</a>
+
+<!--            <a href="/add_drone">Add Drones</a>-->
+<!--            <a href="/add_swarm">Add Swarm</a>-->
+
+<!--            <a href="/user_add">Add Users</a>-->
+            <a href="/user_list">Users</a>
+            <a href="/drone_list">Drones</a>
+            <a href="/swarm_list">Swarm</a>
+
 	    </div>
         <div id="content" class="main">
             {% block content %}

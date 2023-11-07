@@ -5,28 +5,35 @@ List
 {% endblock %}
 
 {% block content %}
-<h1>User List1</h1>
-<ul>
-  {% for user in all_users %}
-     <li>
-                <p><strong>ID:</strong> <span>{ user.id }</span>,
-                <strong>Name:</strong> <span>{{ user.userName }}</span></p>
-            </li>
-  {% endfor %}
-</ul>
-<h1>Drone List</h1>
-<h1>Swarm List</h1>
+<h1>User List</h1>
 
-<form method="POST">
+<body>
 
-    <!-- Security token -->
-    {% csrf_token %}
-
-    <!-- Using the formset -->
-    {{ form.as_p }}
-    {{ userName.name }}
-
-    <input type="submit" value="Submit">
-</form>
-
+    <table  style="width:60%; border: 1px solid; border-collapse: collapse">
+        <thead>
+            <tr style="border: 1px solid; text-align: center;">
+                <th>ID</th>
+                <th style="width:40%; border: 1px solid; ">Name</th>
+                <th style="width:40%; border: 1px solid;">Email</th>
+                <th style="width:20%; border: 1px solid;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for user in users %}
+            <tr style="border: 1px solid; text-align: center;">
+                <td style="width:20%; border: 1px solid; text-align: center; padding-left: 5%; padding-right: 5%;">{{ user.id }}</td>
+                <td style="width:40%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ user.username }}</td>
+                <td style="width:40%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ user.email }}</td>
+                <td>
+                    <a  style="width:10%" href="/user_edit/{{ user.id }}"><span>Edit</span></a>
+                    <a  style="width:10%" href="/user_delete/{{ user.id }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+   <a href="/user_add">Add New User</a>
+</body>
 {% endblock %}

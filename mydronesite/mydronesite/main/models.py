@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -13,7 +15,7 @@ class User(models.Model):
     def __str__(self):
         return self.userName or ' '
 
-# class User(models.Model):
+# class User(AbstractUser):
 #     username = None
 #     email = models.EmailField(_("email address"), unique=True)
 #
@@ -28,9 +30,9 @@ class User(models.Model):
 class Swarm(models.Model):
     # swarmID=models.IntegerField(unique=True)
     swarmName=models.fields.CharField(max_length=32,unique=True)
-    # createdAt=models.DateTimeField("datePublished")
-    # UpdatedAt=models.DateTimeField("dateUpdated")
-    # UpdatedBy=models.IntegerField()
+    # createdAt=models.DateTimeField("datePublished",default=datetime.datetime)
+    # UpdatedAt=models.DateTimeField("dateUpdated", default=datetime.datetime)
+    # UpdatedBy=models.IntegerField(default=" ")
 
     def __str__(self):
         return self.swarmName or ' '
@@ -39,11 +41,11 @@ class Swarm(models.Model):
 class Drone(models.Model):
     user_id=models.ForeignKey(User,null=True, on_delete=models.SET_NULL)
     droneName=models.fields.CharField(max_length=32,unique=True)
-    # MAC_Address=models.CharField(max_length=17)
-    # IPAddress=models.GenericIPAddressField(max_length=64)
-    # createdAT=models.DateTimeField("datePublished")
+    MAC_Address=models.CharField(max_length=17, default="00-00-00-00-00-00")
+    IPAddress=models.GenericIPAddressField(max_length=64, default="192.168.1.1")
+    # createdAT=models.DateTimeField("datePublished",default=datetime.datetime)
     # swarm_id=models.ForeignKey(Swarm,null=True, blank=True, on_delete=models.SET_NULL)
-    # updatedBy=models.IntegerField()
+    # updatedBy=models.IntegerField(default=" ")
 
     def __str__(self):
         return self.droneName or ' '
