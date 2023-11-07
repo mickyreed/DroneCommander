@@ -9,11 +9,11 @@ List
 
 <body>
 
-    <table  style="width:60%; border: 1px solid; border-collapse: collapse">
+    <table  style="width:80%; border: 1px solid; border-collapse: collapse">
         <thead>
             <tr style="border: 1px solid; text-align: center;">
                 <th>ID</th>
-                <th style="width:40%; border: 1px solid; ">Name</th>
+                <th style="width:20%; border: 1px solid; ">Name</th>
                 <th style="width:40%; border: 1px solid;">Email</th>
                 <th style="width:20%; border: 1px solid;">Actions</th>
             </tr>
@@ -23,10 +23,10 @@ List
             <tr style="border: 1px solid; text-align: center;">
                 <td style="width:20%; border: 1px solid; text-align: center; padding-left: 5%; padding-right: 5%;">{{ user.id }}</td>
                 <td style="width:40%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ user.username }}</td>
-                <td style="width:40%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ user.email }}</td>
+                <td style="width:20%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ user.email }}</td>
                 <td>
-                    <a  style="width:10%" href="/user_edit/{{ user.id }}"><span>Edit</span></a>
-                    <a  style="width:10%" href="/user_delete/{{ user.id }}">Delete</a>
+                    <a  href="{%url 'user_edit' user.id %}" class="btn btn-outline-secondary btn-sm"><span>Update</span></a>
+                    <a  href="{%url 'user_delete' user.id %}" class="btn btn-outline-secondary btn-sm">Delete</a>
                 </td>
             </tr>
         {% endfor %}

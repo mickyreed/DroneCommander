@@ -64,39 +64,72 @@ def swarm_add(request):
 
 def user_edit(request, id):
     user = User.objects.get(id=id)
-    return render(request,'user)_edit.html', {'user': user})
+    form = UserForm(request.POST or None, instance=user)
+    if form.is_valid():
+        try:
+            form.save()
+            return redirect('user_list')
+        except:
+            pass
+    return render(request,'main/user_edit.html', {'user': user, 'form': form})
 
 def drone_edit(request, id):
     drone = Drone.objects.get(id=id)
-    return render(request,'drone_edit.html', {'drone': drone})
+    form = DroneForm(request.POST or None, instance=drone)
+    if form.is_valid():
+        try:
+            form.save()
+            return redirect('drone_list')
+        except:
+            pass
+    return render(request,'main/drone_edit.html', {'drone': drone, 'form': form})
 
 def swarm_edit(request, id):
     swarm = Swarm.objects.get(id=id)
-    return render(request,'swarm_edit.html', {'swarm': swarm})
+    form = SwarmForm(request.POST or None, instance=swarm)
+    if form.is_valid():
+        try:
+            form.save()
+            return redirect('swarm_list')
+        except:
+            pass
+    return render(request,'main/swarm_edit.html', {'swarm': swarm, 'form': form})
 
 def user_update(request, id):
     user = User.objects.get(id=id)
-    form = UserForm(request.POST, instance=user)
+    form = UserForm(request.POST or None, instance=user)
     if form.is_valid():
-        form.save()
-        return redirect('home')
-    return render(request, 'main/user_update.html', {'user': user})
+        try:
+            form.save()
+            return redirect('user_list')
+        except:
+            pass
+    return render(request, 'main/user_update.html', {'user': user, 'form': form})
 
 def drone_update(request, id):
     drone = Drone.objects.get(id=id)
-    form = DroneForm(request.POST, instance=drone)
+    form = DroneForm(request.POST or None, instance=drone)
     if form.is_valid():
-        form.save()
-        return redirect('home')
-    return render(request, 'main/update_drone.html', {'drone': drone})
+        try:
+            form.save()
+            return redirect('drone_list')
+        except:
+            pass
+
+    return render(request, 'main/drone_update.html', {'drone': drone, 'form': form})
 
 def swarm_update(request, id):
     swarm = Swarm.objects.get(id=id)
-    form = SwarmForm(request.POST, instance=swarm)
+    form = SwarmForm(request.POST or None, instance=swarm)
     if form.is_valid():
-        form.save()
-        return redirect('home')
-    return render(request, 'main/update_swarm.html', {'swarm': swarm})
+        try:
+            form.save()
+            return redirect('swarm_list')
+        except:
+            pass
+    # form = SwarmForm(request.POST or None, instance=swarm)
+
+    return render(request, 'main/swarm_update.html', {'swarm': swarm, 'form': form})
 
 
 def user_delete(request, id):
@@ -104,10 +137,12 @@ def user_delete(request, id):
     user.delete()
     return redirect('home')
 
+
 def drone_delete(request, id):
     drone = Drone.objects.get(id=id)
     drone.delete()
     return redirect('home')
+
 
 def swarm_delete(request, id):
     swarm = Swarm.objects.get(id=id)

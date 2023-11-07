@@ -1,4 +1,6 @@
+
 {% extends 'main/base.html' %}
+
 <style type="text/css">
     .main{
         margin-left:10px; margin-right:10px; padding: 0px 10px;}
@@ -7,9 +9,8 @@
     {% block title %} Home {% endblock %}
 
 </title>
-
-
 {% block content %}
+<body>
 <h1 style="font-size: 64px; text-align: left;
             display: block;
             margin-left: auto;
@@ -31,7 +32,6 @@
                 <th>ID</th>
                 <th style="width:40%; border: 1px solid; ">Name</th>
                 <th style="width:40%; border: 1px solid;">IP Address</th>
-                <th style="width:20%; border: 1px solid;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -40,9 +40,7 @@
                 <td style="width:20%; border: 1px solid; text-align: center; padding-left: 5%; padding-right: 5%;">{{ drone.id }}</td>
                 <td style="width:40%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ drone.droneName }}</td>
                 <td style="width:40%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ drone.IPAddress }}</td>
-                <td>
-                    <a  style="width:10%" href="/drone_edit/{{ drone.id }}"><span>Edit</span></a>
-                    <a  style="width:10%" href="/drone_delete/{{ drone.id }}">Delete</a>
+                <td> {{ drone }}
                 </td>
             </tr>
         {% endfor %}
@@ -65,12 +63,11 @@
                 <td style="width:20%; border: 1px solid; text-align: center; padding-left: 5%; padding-right: 5%;">{{ swarm.id }}</td>
                 <td style="width:40%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ swarm.swarmName }}</td>
                 <td>
-                    <a  style="width:10%" href="/swarm_edit/{{ swarm.id }}"><span>Edit</span></a>
-                    <a  style="width:10%" href="/swarm_delete/{{ swarm.id }}">Delete</a>
+                    {{ swarm }}
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
+</body>
 {% endblock %}

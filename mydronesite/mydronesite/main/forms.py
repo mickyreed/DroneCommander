@@ -10,8 +10,8 @@ class UserForm(forms.ModelForm):
         model = User
 
         # specify fields to be used
-        # fields = "__all__"
-        fields = ["userName", "email"]
+        fields = "__all__"
+        # fields = ["userName", "email"]
         # exclude = ['title']
 
 

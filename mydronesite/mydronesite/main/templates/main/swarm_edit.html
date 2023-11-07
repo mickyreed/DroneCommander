@@ -1,11 +1,12 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-Login
+List
 {% endblock %}
 
 {% block content %}
-<h1>Login Page</h1>
+<h1>Update Swarm</h1>
+
 <form method="POST">
 
     <!-- Security token -->
@@ -15,6 +16,7 @@ Login
     {{ form.as_p }}
 
     <input type="submit" value="Submit"
-    class="btn btn-secondary">
+        class="btn btn-secondary">
 </form>
+
 {% endblock %}
