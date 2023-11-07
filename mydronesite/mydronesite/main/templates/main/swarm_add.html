@@ -14,13 +14,12 @@ List
 
     <!-- Security token -->
     {% csrf_token %}
-
+    {% bootstrap_form form %}
     <!-- Using the formset -->
     {{form.as_p }}
 
     <input type="submit" value="Submit"
     class="btn btn-secondary">
 </form>
-<!--<a href="/update_swarm">   Update Swarm | </a>-->
-<!--<a href="/delete_swarm">   Delete Swarm   </a>-->
+
 {% endblock %}
