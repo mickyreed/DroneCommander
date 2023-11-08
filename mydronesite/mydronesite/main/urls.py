@@ -1,4 +1,5 @@
-from django.urls import path
+from django.db import router
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -27,4 +28,8 @@ urlpatterns = [
     path('user_edit/<int:id>', views.user_edit, name='user_edit'),
     path('user_update/<int:id>', views.user_update, name='user_update'),
     path('user_delete/<int:id>', views.user_delete, name='user_delete'),
+
+    # DJANGO REST PATHS
+    # path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

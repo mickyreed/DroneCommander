@@ -1,5 +1,7 @@
 from django import forms
 from . models import User, Drone, Swarm
+from django.contrib.auth.models import User
+
 
 # creating a form
 class UserForm(forms.ModelForm):
@@ -13,7 +15,6 @@ class UserForm(forms.ModelForm):
         fields = "__all__"
         # fields = ["userName", "email"]
         # exclude = ['title']
-
 
 class SwarmForm(forms.ModelForm):
 
