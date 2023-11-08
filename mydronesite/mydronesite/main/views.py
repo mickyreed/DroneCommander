@@ -183,8 +183,8 @@ def home(request):
     swarm = Swarm.objects.all()
     return render(request, 'main/home.html', {'swarm': swarm})
 
-def login(response):
-    return render(response, "main/user_add.html", {})
+def login(request):
+    return render(request, "main/registration.html", {})
 
 def index(request):
     all_users = User.objects.all()
