@@ -2,6 +2,7 @@ from djitellopy import Tello
 from .models import CustomUser, Drone, Swarm
 import time
 
+
 class TelloController:
     def __init__(self):
         self.tello = Tello()
@@ -19,7 +20,7 @@ class TelloController:
         time.sleep(2)
         self.tello.move_right(50)
         time.sleep(2)
-        self.tello.move_backward(50)
+        self.tello.move_back(50)
         time.sleep(2)
         self.tello.move_left(50)
         time.sleep(2)
