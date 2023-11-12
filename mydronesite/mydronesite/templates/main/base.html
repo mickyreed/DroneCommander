@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<style>
+    body { background-color: #0A1828;
+            color: #BFA181;
+            background-image: url('static/drone3.png');
+            background-attachment:fixed;
+            background-position:center bottom;
+            background-size: 50%;
+            background-repeat: no-repeat;
+            line-height: 2.0;
+            )}
+    a { color: #EF036C; }
+    h1 { color: #178582; }
+</style>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+
+        {% if request.user.is_authenticated %}
+            <p style="margin-left:10%;">Hello, {{ request.user.username}}   | <a href="{% url 'logout' %}">Log Out</a></p>
+
+        {% else %}
+            <p style="margin-left:10%;">Hello, {{ user.username|default:'Guest' }}!  <a href="{% url 'user_add' %}">Register</a> | <a href="{% url 'login' %}">Login</a></p>
+        {% endif %}
+        <hr>
+        <style type="text/css">
+            .sidenav {
+                height:100%;
+                width:160px;
+                position: fixed;
+                z-index:1;
+                top:0;
+                left:0;
+                background-color:#111;
+                overflow-x: :hidden;
+                padding-top:20px;
+                line-height: 1.2;
+            }
+
+            .sidenav a {
+                padding:6px 8px 6px 16px;
+                text-decoration: none;
+                font-size:25px;
+                color: #818181;
+                display:block;
+            }
+
+            .sidenav a:hover{
+                color:#f1f1f1;
+            }
+
+            .main{
+                margin-left:500px;
+                padding: 0px 10px;
+                 title {
+                text-align: center;
+                }
+            }
+        </style>
+        <title style>
+            {% block title %}Drone Site{% endblock %}</title>
+    </head>
+
+    <body>
+        <div class="sidenav">
+
+            <a href="/">Home</a>
+<!--            <a href="/login">Login</a>-->
+            <a href="/user_list">Users</a>
+            <a href="/drone_list">Drones</a>
+            <a href="/swarm_list">Swarm</a>
+            <br>
+            <a style="color: #EF036C;" href="/ap_list">AP</a>
+            <a style="color: #EF036C;" href="/control">Control</a>
+
+	    </div>
+        <div id="content" class="main">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+
+
+    </body>
+</html>

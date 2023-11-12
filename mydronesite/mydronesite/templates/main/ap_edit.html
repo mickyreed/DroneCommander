@@ -1,21 +1,23 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-Login
+Update AP
 {% endblock %}
 
 {% block content %}
-<h1>Login Page</h1>
+<h1>Update AP</h1>
+
 <form method="POST">
 
     <!-- Security token -->
     {% csrf_token %}
-    {% bootstrap_form form %}
 
     <!-- Using the formset -->
     {{ form.as_p }}
+    <br/>
 
     <input type="submit" value="Submit"
         class="btn btn-secondary">
 </form>
+
 {% endblock %}

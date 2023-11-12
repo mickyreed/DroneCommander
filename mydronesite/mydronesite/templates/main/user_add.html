@@ -1,11 +1,10 @@
 {% extends 'main/base.html' %}
-
+{% load crispy_forms_tags %}
 {% block title %}
-List
+Login
 {% endblock %}
-
+<h1>Login Page</h1>
 {% block content %}
-<h1>Add User</h1>
 
 <form method="POST">
 
@@ -19,5 +18,4 @@ List
     <input type="submit" value="Submit"
         class="btn btn-secondary">
 </form>
-
 {% endblock %}

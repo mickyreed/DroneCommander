@@ -1,0 +1,77 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+List
+{% endblock %}
+
+{% block content %}
+<h1 style="font-size: 64px; text-align: left;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%;">Drone Commander</h1>
+<h2>Welcome, {{ user.username|default:'Guest' }}!</h2>
+<br>
+<body>
+    <h2>Registered Users</h2>
+    <table  style="width:80%; border: 1px solid; border-collapse: collapse">
+        <thead>
+            <tr style="border: 1px solid; text-align: center;">
+                <th>ID</th>
+                <th style="width:20%; border: 1px solid; ">Name</th>
+                <th style="width:40%; border: 1px solid;">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for user in users %}
+            <tr style="border: 1px solid; text-align: center;">
+                <td style="width:20%; border: 1px solid; text-align: center; padding-left: 5%; padding-right: 5%;">{{ user.id }}</td>
+                <td style="width:40%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ user.username }}</td>
+                <td style="width:20%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ user.email }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<!--    <br>-->
+<!--    <br>-->
+<!--    <h2>Drones</h2>-->
+<!--    <table  style="width:60%; border: 1px solid; border-collapse: collapse">-->
+<!--        <thead>-->
+<!--            <tr style="border: 1px solid; text-align: center;">-->
+<!--                <th>ID</th>-->
+<!--                <th style="width:40%; border: 1px solid; ">Name</th>-->
+<!--                <th style="width:40%; border: 1px solid;">IP Address</th>-->
+<!--            </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--    {% for drone in drones %}-->
+<!--            <tr style="border: 1px solid; text-align: center;">-->
+<!--                <td style="width:20%; border: 1px solid; text-align: center; padding-left: 5%; padding-right: 5%;">{{ drone.id }}</td>-->
+<!--                <td style="width:40%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ drone.droneName }}</td>-->
+<!--                <td style="width:40%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ drone.IPAddress }}</td>-->
+<!--            </tr>-->
+<!--        {% endfor %}-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--    <br>-->
+<!--    <br>-->
+<!--    <h2>Swarm</h2>-->
+<!--    <table  style="width:60%; border: 1px solid; background-color: translucent 50% ;border-collapse: collapse">-->
+<!--            <thead>-->
+<!--                <tr style="border: 1px solid; text-align: center;">-->
+<!--                    <th style="width:10%; border: 1px solid; ">ID</th>-->
+<!--                    <th style="width:30%; border: 1px solid; ">Name</th>-->
+<!--                </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--        {% for swarm in swarms %}-->
+<!--                <tr style="border: 1px solid; text-align: center;">-->
+<!--                    <td style="width:10%; border: 1px solid; text-align: center; padding-left: 5%; padding-right: 5%;">{{ swarm.id }}</td>-->
+<!--                    <td style="width:30%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ swarm.swarmName }}</td>-->
+<!--                </tr>-->
+<!--            {% endfor %}-->
+<!--            </tbody>-->
+<!--        </table>-->
+</body>
+{% endblock %}
+

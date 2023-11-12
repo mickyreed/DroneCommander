@@ -5,20 +5,19 @@ List
 {% endblock %}
 
 {% block content %}
-<h1>Update User</h1>
+<h1>Update Drone</h1>
 
 <form method="POST">
 
     <!-- Security token -->
     {% csrf_token %}
-    {% bootstrap_form form %}
 
     <!-- Using the formset -->
     {{ form.as_p }}
     <br/>
 
-    <input type="submit" value="Submit"
-        class="btn btn-secondary">
+    <input type="submit" value="Update"
+    class="btn btn-secondary">
 </form>
 
 {% endblock %}

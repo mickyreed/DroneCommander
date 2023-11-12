@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Create Account
+{% endblock %}
+
+<h1>Create Account</h1>
+
+{% block content %}
+<h1>Create Account</h1>
+<form method="POST">
+
+    <!-- Security token -->
+    {% csrf_token %}
+
+    <!-- Using the formset -->
+    {{ form}}
+
+    <button Style="Background-color: #EF036C" type="submit" class="btn btn-success">Register</button>
+</form>
+
+{% endblock %}

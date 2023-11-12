@@ -1,0 +1,74 @@
+{% extends 'main/base.html' %}
+
+<style type="text/css">
+    .main{
+        margin-left:10px; margin-right:10px; padding: 0px 10px;}
+</style>
+<title>
+    {% block title %} Home {% endblock %}
+
+</title>
+{% block content %}
+<body>
+<h1 style="font-size: 64px; text-align: left;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%;">Drone Commander home</h1>
+
+<!--{% if user.is_authenticated %}-->
+<!--  Hi {{ user.username }}!-->
+<!--{% else %}-->
+<!--  <p>You are not logged in</p>-->
+<!--  <a href="{% url 'login' %}">Log In</a>-->
+<!--{% endif %}-->
+<h2>Hello, {{ user.username|default:'Guest' }}!!!</h2>
+
+<body>
+    <h3>Registered Users:</h3>
+    <table  style="width:60%; border: 1px solid; border-collapse: collapse">
+        <thead>
+            <tr style="border: 1px solid; text-align: center;">
+                <th style="width:5%; border: 1px solid; ">ID</th>
+                <th style="width:20%; border: 1px solid; ">Name</th>
+                <th style="width:20%; border: 1px solid;">Email</th>
+                <th style="width:15%; border: 1px solid;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr style="border: 1px solid; text-align: center;">
+                <td style="width:5%; border: 1px solid; text-align: center; padding-left: 5%; padding-right: 5%;">{{ user.id }}</td>
+                <td style="width:20%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ user.username }}</td>
+                <td style="width:20%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ user.email }}</td>
+                <td style="width:15%; border: 1px solid; ">
+                    <a  href="{%url 'user_edit' user.id %}" class="btn btn-outline-secondary btn-sm"><span>Update</span></a>
+                    <a  href="{%url 'user_delete' user.id %}" class="btn btn-outline-secondary btn-sm">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <table  style="width:60%; border: 1px solid; border-collapse: collapse">
+        <thead>
+            <tr style="border: 1px solid; text-align: center;">
+                <th>ID</th>
+                <th style="width:40%; border: 1px solid; ">Name</th>
+                <th style="width:40%; border: 1px solid;">IP Address</th>
+                <th style="width:40%; border: 1px solid;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for drone in drones %}
+            <tr style="border: 1px solid; text-align: center;">
+                <td style="width:20%; border: 1px solid; text-align: center; padding-left: 5%; padding-right: 5%;">{{ drone.id }}</td>
+                <td style="width:40%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ drone.droneName }}</td>
+                <td style="width:40%; border: 1px solid; text-align: left; padding-left: 5%; padding-right: 5%;">{{ drone.IPAddress }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+</body>
+{% endblock %}

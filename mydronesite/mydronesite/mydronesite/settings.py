@@ -14,8 +14,8 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -27,22 +27,27 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = "main.CustomUser"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Application definition
 
-CRISPY_TEMPLATE_PACK="bootstrap4"
-
 INSTALLED_APPS = [
+
+    # my apps
+    'crispy_forms',
+    'rest_framework',
+    'main.apps.MainConfig',
+    # 'DJITelloPy',
+
+    # django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
-    "bootstrap5",
-    'rest_framework',
-    'main.apps.MainConfig',
 ]
 
 MIDDLEWARE = [
@@ -57,10 +62,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'mydronesite.urls'
 
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / "templates"],
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,6 +80,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'mydronesite.wsgi.application'
 

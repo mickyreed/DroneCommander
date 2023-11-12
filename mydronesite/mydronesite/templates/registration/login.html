@@ -1,0 +1,33 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+<h1>Log In</h1>
+<h2 class="text-center">Log in to your account</h2>
+{%block content%}
+  <form method="post">
+	  {% csrf_token %}
+
+		{% for field in form %}
+			{{ field.label_tag }}
+			{{ field }}
+
+			{% if field.help_text %}
+				<small style="color: grey;">{{field.help_text}}</small>
+			{% endif %}
+
+		{% endfor %}
+
+		{% for error in field.errors %}
+			<p style="color: red;">{{error}}</p>
+		{% endfor %}
+
+	<button type="submit"><a href="{% url 'login' %}">Log in</a></button>
+
+	<hr>
+<!--	<p class="text-center">Forgot your password <a href="#">Reset Password</a></p>-->
+<!--	<p class="text-center">Don't have a account? <a href="#">Join Now</a></p>-->
+	</form>
+
+{% endblock %}

@@ -5,13 +5,14 @@ List
 {% endblock %}
 
 {% block content %}
-<h1>Update Swarm</h1>
+<h1>Update User</h1>
 
 <form method="POST">
 
     <!-- Security token -->
     {% csrf_token %}
-    {% bootstrap_form form %}
+
+
     <!-- Using the formset -->
     {{ form.as_p }}
     <br/>

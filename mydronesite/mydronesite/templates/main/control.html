@@ -1,0 +1,51 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Control
+{% endblock %}
+
+{% block content %}
+<h1>Dashboard</h1>
+
+<body>
+    <h2>Active Drones</h2>
+    <table  style="width:80%; border: 1px solid; ">
+        <thead>
+            <tr style="border: 1px solid; text-align: center;">
+                <th style=" min-height: 1px; width:5%; border: 1px solid; ">ID</th>
+                <th style=" min-height: 1px; width:15%; border: 1px solid; ">Name</th>
+                <th style=" min-height: 1px; width:15%; border: 1px solid;">IP Address</th>
+                <th style=" min-height: 1px; width:20%; border: 1px solid;">MAC Address</th>
+                <th style=" min-height: 1px; width:15%; border: 1px solid;">Swarm</th>
+                <th style=" min-height: 1px; width:10%; border: 1px solid;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for drone in drones %}
+             <tr style="border: 1px solid; text-align: center;">
+                <td style=" min-height: 1px; width:5%; border: 1px solid; text-align: center">{{ drone.id }}</td>
+                <td style=" min-height: 1px; width:15%; border: 1px solid; text-align: center; ">{{ drone.droneName }}</td>
+                <td style=" min-height: 1px; width:15%; border: 1px solid; text-align: center; ">{{ drone.IPAddress }}</td>
+                <td style=" min-height: 1px; width:20%; border: 1px solid; text-align: center; ">{{ drone.MAC_Address }}</td>
+                <td style=" min-height: 1px; width:15%; border: 1px solid; text-align: center; ">{{ drone.swarm_id }}</td>
+                <td style=" min-height: 1px; width:15%; border: 1px solid; text-align: center; ">
+                    <a  style=" min-height: 1px; width:10%" href="/drone_edit/{{ drone.id }}"><span>Edit</span></a>
+                    <form action="{% url 'connect' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Connect</button>
+                    </form>
+                </td>
+             </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <h2>Flight Control</h2>
+        <form action="{% url 'launch' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Launch</button>
+        </form>
+
+</body>
+{% endblock %}

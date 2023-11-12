@@ -5,21 +5,19 @@ List
 {% endblock %}
 
 {% block content %}
-<h1>Add Swarm</h1>
-	<ul>
+<h1>Update Drone</h1>
 
-	</ul>
-
-<form method="POST" enctype="multipart/form-data">
+<form method="POST">
 
     <!-- Security token -->
     {% csrf_token %}
-    {% bootstrap_form form %}
+
     <!-- Using the formset -->
-    {{form.as_p }}
+    {{ form.as_p }}
+    <br/>
 
     <input type="submit" value="Submit"
-    class="btn btn-secondary">
+        class="btn btn-secondary">
 </form>
 
 {% endblock %}
