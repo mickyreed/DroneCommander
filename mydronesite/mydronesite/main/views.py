@@ -11,11 +11,12 @@ from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.http import HttpResponse
-# from djitellopy import Tello
-# from examples import simple
-from .tello_control import TelloController
+from djitellopy import Tello
+from examples import simple
+# from .tello_control import TelloController
 import time
 from django.db import IntegrityError
+import requests
 
 
 
@@ -228,37 +229,6 @@ def logout_view(request):
     return redirect('home')
 
 
-# create an instance of the tello controller
-tello_control = TelloController()
-active_drones = []
-
-def control(request):
-    telemetry_data = []
-    all_drones = Drone.objects.all()
-    print(all_drones)
-    return render(request, "main/control.html",{'drones': all_drones})
-
-
-# @login_required
-def connect(request):
-    if request.method == 'POST':
-        tello_control.connect()
-        return JsonResponse({'message': 'Drone connected successfully'})
-    else:
-        return HttpResponse(status=405)  # Method Not Allowed for non-POST requests
-
-
-# @login_required
-def launch(request):
-    if request.method == 'POST':
-        tello_control.takeoff()
-        tello_control.move_box()
-        tello_control.land()
-        return JsonResponse({'message': 'Drone launched successfully'})
-    else:
-        return HttpResponse(status=405)  # Method Not Allowed for non-POST requests
-
-
 def index(request):
     # all_users = User.objects.all()
     user = get_user_model().objects.get()
@@ -309,3 +279,91 @@ def ap_delete(request, id):
     ap = AP.objects.get(id=id)
     ap.delete()
     return redirect('ap_list')
+
+
+# create an instance of the tello controller
+# tello_control = TelloController()
+active_drones = []
+
+
+# def control(request):
+#     if request.method == 'POST':
+#         # Assuming you have a form with a button that triggers the POST request
+#         command = request.POST.get('command')
+#
+#         # Send the command to the mock drone server
+#         response = requests.post('http://127.0.0.1:8890/', data=command.encode('utf-8'))
+#
+#         # Display the response from the mock drone on the front end
+#         telemetry_data = response.text
+#         return render(request, 'control.html', {'telemetry_data': telemetry_data})
+#
+#     return render(request, 'control.html')
+
+
+
+
+# def control(request):
+#     telemetry_data = []
+#     all_drones = Drone.objects.all()
+#     print(all_drones)
+#     return render(request, "main/control.html",{'drones': all_drones})
+
+
+# @login_required
+# def connect(request):
+#     if request.method == 'POST':
+#         tello_control.connect()
+#         return JsonResponse({'message': 'Drone connected successfully'})
+#     else:
+#         return HttpResponse(status=405)  # Method Not Allowed for non-POST requests
+
+
+# @login_required
+def launch(request):
+    if request.method == 'POST':
+        tello_control.takeoff()
+        tello_control.move_box()
+        tello_control.land()
+        return JsonResponse({'message': 'Drone launched successfully'})
+    else:
+        return HttpResponse(status=405)  # Method Not Allowed for non-POST requests
+
+
+def connect(request):
+    if request.method == 'POST':
+        # Assuming the form sends the 'drone_id' as part of the POST data
+        drone_id = request.POST.get('drone_id')
+        drone = get_object_or_404(Drones, DroneID=drone_id)
+
+        connected_drones[drone_id] = TelloDrone(host=drone.IPAddress)
+        return HttpResponse(f"Connected to {drone.DroneName}")
+    else:
+        return HttpResponse("Invalid Request Method", status=405)
+
+
+from django.http import HttpResponse
+
+
+def send_command(request):
+    if request.method == 'POST':
+        selected_drone_id = request.POST.get('selected_drone_id')
+        command = request.POST.get('command')
+
+        if selected_drone_id not in connected_drones:
+            return HttpResponse("Drone not connected yet")
+
+        drone = connected_drones[selected_drone_id]
+
+        if command == 'takeoff':
+            drone.takeoff()
+        elif command == 'land':
+            drone.land()
+        # Add other commands and their execution logic here
+        else:
+            return HttpResponse("Invalid command")
+
+        response_text = f"Command '{command}' executed on Drone ID: {selected_drone_id}"
+        return HttpResponse(response_text)
+    else:
+        return HttpResponse("Invalid Request Method", status=405)

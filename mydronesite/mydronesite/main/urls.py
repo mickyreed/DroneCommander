@@ -42,6 +42,11 @@ urlpatterns = [
     path('launch', launch, name='launch'),
     path('launch', launch, name='launch'),
 
+    path('control/', control, name='control'),
+    path('tello_control/', control, name='tello_control'),
+
+
+
     # path('fly_drone', fly_drone, name='fly_drone')
 
     # ACCESS POINT URLS
@@ -49,6 +54,7 @@ urlpatterns = [
     path('ap_edit/<int:id>', ap_edit, name='ap_edit'),
     path('ap_add>', ap_add, name='ap_add'),
     path('ap_delete/<int:id>', ap_delete, name='ap_delete'),
+
 
     # DJANGO REST PATHS
     # path('', include(router.urls)),

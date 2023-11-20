@@ -1,5 +1,5 @@
 from djitellopy import Tello
-from .models import CustomUser, Drone, Swarm
+
 import time
 
 

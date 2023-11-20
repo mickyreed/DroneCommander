@@ -47,5 +47,21 @@ Control
             <button type="submit">Launch</button>
         </form>
 
+    <!-- Display Telemetry Data -->
+    <div>
+        <h2>Telemetry Data:</h2>
+        <pre>{{ telemetry_data }}</pre>
+    </div>
+
+    <!-- Form to Send Commands -->
+    <form method="post" action="{% url 'control' %}">
+        {% csrf_token %}
+        <button type="submit" name="command" value="connect">Connect</button>
+        <button type="submit" name="command" value="takeoff">Takeoff</button>
+        <button type="submit" name="command" value="land">Land</button>
+        <!-- Add more buttons for other commands as needed -->
+    </form>
+
+
 </body>
 {% endblock %}
