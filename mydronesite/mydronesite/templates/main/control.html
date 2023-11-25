@@ -41,27 +41,124 @@ Control
     </table>
     <br>
 
+<!--    <h2>Flight Control</h2>-->
+<!--        <form action="{% url 'launch_swarm' %}" method="post">-->
+<!--            {% csrf_token %}-->
+<!--            <button type="submit">Launch</button>-->
+<!--        </form>-->
+
+
+
+
+<form id="flightControl">
     <h2>Flight Control</h2>
-        <form action="{% url 'launch' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Launch</button>
-        </form>
+<!--    <button type="button" onclick="launchSwarm()">Launch</button>-->
+</form>
+
+<!-- Launch Swarm Button -->
+<div>
+    <label for="swarmSelect">Select Swarm:</label>
+    <select id="swarmSelect">
+        {% for swarm in swarms %}
+            <option value="{{ swarm.id }}">{{ swarm.swarmName }}</option>
+        {% endfor %}
+    </select>
+
+    <button onclick="launchSwarm()">Launch Swarm</button>
+
 
     <!-- Display Telemetry Data -->
-    <div>
-        <h2>Telemetry Data:</h2>
-        <pre>{{ telemetry_data }}</pre>
-    </div>
+    <!-- Flight Log Container -->
+<div id="flightLogContainer">
+    <h2>Flight Data</h2>
+    <p id="status"></p>
+    <p id="message"></p>
+    <ul id="telemetry"></ul>
+    <ul id="flightLog"></ul>
+</div>
 
-    <!-- Form to Send Commands -->
-    <form method="post" action="{% url 'control' %}">
-        {% csrf_token %}
-        <button type="submit" name="command" value="connect">Connect</button>
-        <button type="submit" name="command" value="takeoff">Takeoff</button>
-        <button type="submit" name="command" value="land">Land</button>
-        <!-- Add more buttons for other commands as needed -->
-    </form>
+<!--    <label for="droneSelect">Select Drone:</label>-->
+<!--    <select id="droneSelect">-->
+<!--        {% for drone in selected_swarm_drones %}-->
+<!--            <option value="{{ drone.id }}">{{ drone.droneName }}</option>-->
+<!--        {% endfor %}-->
+<!--    </select>-->
+</div>
 
+
+
+<!--    <div>-->
+<!--        <h2>Telemetry Data:</h2>-->
+<!--        <pre>{{ telemetry_data }}</pre>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Form to Send Commands &ndash;&gt;-->
+<!--    <form method="post" action="{% url 'control' %}">-->
+<!--        {% csrf_token %}-->
+<!--        <button type="submit" name="command" value="connect">Connect</button>-->
+<!--        <button type="submit" name="command" value="takeoff">Takeoff</button>-->
+<!--        <button type="submit" name="command" value="land">Land</button>-->
+<!--        &lt;!&ndash; Add more buttons for other commands as needed &ndash;&gt;-->
+<!--    </form>-->
+<script>
+function launchSwarm() {
+    var swarmId = document.getElementById('swarmSelect').value;
+
+    // Send AJAX request to launch_swarm view
+    fetch('/launch_swarm/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+        },
+        body: 'selected_swarm=' + swarmId,
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Update the webpage with the response data
+        document.getElementById('status').innerText = data.status;
+
+<!--        document.getElementById('message').innerText = data.message;-->
+
+        // Clear previous telemetry data
+        document.getElementById('telemetry').innerHTML = '';
+
+<!--        // Display telemetry data for each drone-->
+<!--        for (const droneData of data.telemetry_data) {-->
+<!--            for (const [droneName, telemetryData] of Object.entries(droneData)) {-->
+<!--                const telemetryElement = document.createElement('p');-->
+<!--                telemetryElement.innerText = `${droneName}: Battery Level - ${telemetryData.battery_level}%, Flight Time - ${telemetryData.flight_time} seconds`;-->
+<!--                document.getElementById('telemetry').appendChild(telemetryElement);-->
+<!--            }-->
+<!--        }-->
+
+       // Display telemetry data on the webpage
+        var telemetryContainer = document.getElementById('telemetry');
+        telemetryContainer.innerHTML = '';
+
+        data.telemetry_data_list.forEach(function(item) {
+            for (var key in item) {
+                telemetryContainer.innerHTML += '<p>' + key + ': ' + JSON.stringify(item[key]) + '</p>';
+            }
+        });
+
+
+<!--        // Clear the previous flight log-->
+<!--        var flightLogContainer = document.getElementById('flightLog');-->
+<!--        flightLogContainer.innerHTML = '';-->
+
+<!--        // Add each item in flight_data to the flight log-->
+<!--        data.flight_data.forEach(item => {-->
+<!--            var listItem = document.createElement('li');-->
+<!--            listItem.innerText = item;-->
+<!--            flightLogContainer.appendChild(listItem);-->
+<!--        });-->
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+</script>
 
 </body>
 {% endblock %}
