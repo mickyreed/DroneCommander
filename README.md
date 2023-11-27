@@ -18,9 +18,11 @@ cd msr_drone_1.0
 
 pip install - r requirements.txt
 
-Once this has installed, if you got to the file, and from the terminal type
+Once this has installed, if you got to the file, and from the terminal type:
+
 cd .\mydronesite\
-cd .\mydronesite\    
+cd .\mydronesite\
+
 python manage.py runserver # this will start the application and prvide a link to the webpage
 
 
