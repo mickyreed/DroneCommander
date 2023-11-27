@@ -30,9 +30,9 @@ Control
                 <td style=" min-height: 1px; width:15%; border: 1px solid; text-align: center; ">{{ drone.swarm_id }}</td>
                 <td style=" min-height: 1px; width:15%; border: 1px solid; text-align: center; ">
                     <a  style=" min-height: 1px; width:10%" href="/drone_edit/{{ drone.id }}"><span>Edit</span></a>
-                    <form action="{% url 'connect' %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit">Connect</button>
+<!--                    <form action="{% url 'connect' %}" method="post">-->
+<!--                        {% csrf_token %}-->
+<!--                        <button type="submit">Connect</button>-->
                     </form>
                 </td>
              </tr>

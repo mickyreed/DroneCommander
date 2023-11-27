@@ -244,7 +244,7 @@ def ap_edit(request, id):
             return redirect('ap_list')
         except:
             pass
-    return render(request,'main/ap_list.html', {'ap': ap, 'form': form})
+    return render(request,'main/ap_edit.html', {'ap': ap, 'form': form})
 
 
 def ap_add(request):
