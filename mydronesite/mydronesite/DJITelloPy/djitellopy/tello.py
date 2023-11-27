@@ -46,7 +46,7 @@ class Tello:
     VS_UDP_PORT = DEFAULT_VS_UDP_PORT
 
     # CONTROL_UDP_PORT = 8889 # this is not tello default port
-    CONTROL_UDP_PORT = 8999
+    CONTROL_UDP_PORT = 8889
     STATE_UDP_PORT = 8890
     # OPTIONAL_CONTROL_UDP_PORT = None
     # OPTIONAL_STATE_UDP_PORT = None

@@ -292,24 +292,6 @@ def control(request):
 
     return render(request, 'main/control.html', {'drones': active_drones, 'swarms': swarms, 'selected_swarm_drones': selected_swarm_drones})
 
-
-
-
-# def control(request):
-#     telemetry_data = []
-#     all_drones = Drone.objects.all()
-#     print(all_drones)
-#     return render(request, "main/control.html",{'drones': all_drones})
-
-
-# @login_required
-# def connect(request):
-#     if request.method == 'POST':
-#         tello_control.connect()
-#         return JsonResponse({'message': 'Drone connected successfully'})
-#     else:
-#         return HttpResponse(status=405)  # Method Not Allowed for non-POST requests
-
 def launch_swarm(request):
 
     if request.method == 'POST':
@@ -373,21 +355,21 @@ def launch_drone(ip_address):
         flight_log.append("Landing...")
         drone.land()
 
+        # Query the battery level
+        battery_level = drone.get_battery()
+
+        # Print the battery level
+        print(f"Battery Level: {battery_level}%")
+        # flight_log.append("Battery...")
+
         # Query telemetry data
         try:
-            battery_level = drone.query_battery()
-            flight_time = drone.query_flight_time()
-            active = drone.query_active()
+            battery_level = drone.get_battery()
+            flight_time = drone.get_flight_time()
+
         except Exception as e:
             print(f"Error getting telemetry data: {e}")
-            battery_level, flight_time, active = None, None, None
-
-        # Prepare telemetry data dictionary
-        telemetry_data = {
-            'battery_level': query_battery(drone),
-            'flight_time': query_flight_time(drone),
-            'active': query_active(drone),
-        }
+            battery_level, flight_time, = None, None
 
         # Return a JSON response with flight log
         response_data = {
@@ -396,75 +378,18 @@ def launch_drone(ip_address):
             'telemetry_data': {
             'battery_level': battery_level,
             'flight_time': flight_time,
-            'active': active,
             }
         }
-
         return response_data
-
     except Exception as e:
         # Handle exceptions (e.g., if the drone disconnects unexpectedly)
         response_data = {'status': 'error', 'message': str(e)}
         return response_data
 
-
-def query_battery(drone):
-    return drone.send_read_command('battery?')
-
-
-def query_flight_time(drone):
-    return drone.send_read_command('time?')
-
-
-def query_active(drone):
-    return drone.send_read_command('active?')
-
-
-# @login_required
-# def launch(request):
-#     if request.method == 'POST':
-#         tello_control.takeoff()
-#         tello_control.move_box()
-#         tello_control.land()
-#         return JsonResponse({'message': 'Drone launched successfully'})
-#     else:
-#         return HttpResponse(status=405)  # Method Not Allowed for non-POST requests
-
-
 def connect(request):
     if request.method == 'POST':
-        # Assuming the form sends the 'drone_id' as part of the POST data
         drone = request.POST.get('drone_id')
-        # drone = get_object_or_404(Drones, DroneID=drone_id)
 
-        # drone[drone_id] = TelloDrone(host=drone.IPAddress)
         return HttpResponse(f"Connected to {drone.DroneName}")
     else:
         return HttpResponse("Invalid Request Method", status=405)
-
-
-
-
-#
-# def send_command(request):
-#     if request.method == 'POST':
-#         selected_drone_id = request.POST.get('selected_drone_id')
-#         command = request.POST.get('command')
-#
-#         if selected_drone_id not in connected_drones:
-#             return HttpResponse("Drone not connected yet")
-#
-#         drone = connected_drones[selected_drone_id]
-#
-#         if command == 'takeoff':
-#             drone.takeoff()
-#         elif command == 'land':
-#             drone.land()
-#         # Add other commands and their execution logic here
-#         else:
-#             return HttpResponse("Invalid command")
-#
-#         response_text = f"Command '{command}' executed on Drone ID: {selected_drone_id}"
-#         return HttpResponse(response_text)
-#     else:
-#         return HttpResponse("Invalid Request Method", status=405)
