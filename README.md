@@ -13,8 +13,15 @@ A Telemetry FLight Data feedback section which deisplays flight data related to 
 
 ## Installation
 git clone https://github.com/mickyreed/msr_drone_1.0.git
+
 cd msr_drone_1.0
+
 pip install - r requirements.txt
+
+Once this has installed, if you got to the file, and from the terminal type
+cd .\mydronesite\
+cd .\mydronesite\    
+python manage.py runserver # this will start the application and prvide a link to the webpage
 
 
 ## Usage
