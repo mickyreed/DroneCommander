@@ -1,6 +1,6 @@
-# MyDroneControl
+# Drone Commander
 ## Introduction
-MyDroneControl is a Tello drone controller made for Diploma Advanced Programming.
+Drone Commander is a Tello drone controller made for Diploma Advanced Programming.
 The app uses Django with a custom crud and template to control drone swarms using the DJITelloPy package
 ## Features
 The app features the following
