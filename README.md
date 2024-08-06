@@ -1,4 +1,4 @@
-# msr_drone_1.0
+# MyDroneControl
 ## Introduction
 MyDroneControl is a Tello drone controller made for Diploma Advanced Programming.
 The app uses Django with a custom crud and template to control drone swarms using the DJITelloPy package
